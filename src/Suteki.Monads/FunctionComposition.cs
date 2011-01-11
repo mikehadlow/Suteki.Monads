@@ -42,6 +42,18 @@ namespace Suteki.Monads
             var r1 = add2Mult2(a);
             Console.Out.WriteLine("r1.Value = {0}", r1.Value);
         }
+
+        public void WriteArbitraryIdentityExpressions()
+        {
+            var result = 
+                "Hello World!".ToIdentity().Bind(                   a => 
+                7.ToIdentity().Bind(                                b =>
+                (new DateTime(2010, 1, 11)).ToIdentity().Bind(      c =>
+                (a + ", " + b.ToString() + ", " + c.ToShortDateString())
+                .ToIdentity())));
+
+            Console.WriteLine(result.Value);
+        }
     }
 
     // The simplest possible Monad, Identity
