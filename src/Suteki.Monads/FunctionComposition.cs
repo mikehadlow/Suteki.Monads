@@ -33,7 +33,7 @@ namespace Suteki.Monads
             var a = 5;
 
             // we can't compose them directly, the types don't match. This won't compile:
-            // Func<int, Identity<int>> add2Mult2 = x => mult2(add2(x));
+            // Func<int, Identity<int>> add2Mult2 = x => mult2(add2(x).Value);
 
             // we need a 'Bind' function to compose them:
             Func<int, Identity<int>> add2Mult2 = x => add2(x).Bind(mult2);
@@ -51,6 +51,17 @@ namespace Suteki.Monads
                 (new DateTime(2010, 1, 11)).ToIdentity().Bind(      c =>
                 (a + ", " + b.ToString() + ", " + c.ToShortDateString())
                 .ToIdentity())));
+
+            Console.WriteLine(result.Value);
+        }
+
+        public void WriteArbitaryIdentityExpressionsWithLinq()
+        {
+            var result =
+                from a in "Hello World!".ToIdentity()
+                from b in 7.ToIdentity()
+                from c in (new DateTime(2010, 1, 11)).ToIdentity()
+                select a + ", " + b.ToString() + ", " + c.ToShortDateString();
 
             Console.WriteLine(result.Value);
         }
@@ -82,6 +93,11 @@ namespace Suteki.Monads
         public static Identity<B> Bind<A, B>(this Identity<A> a, Func<A, Identity<B>> func)
         {
             return func(a.Value);
+        }
+
+        public static Identity<C> SelectMany<A, B, C>(this Identity<A> a, Func<A, Identity<B>> func, Func<A, B, C> select)
+        {
+            return select(a.Value, a.Bind(func).Value).ToIdentity();
         }
     }
 }
