@@ -97,7 +97,7 @@ namespace Suteki.Monads
 
         public static Identity<C> SelectMany<A, B, C>(this Identity<A> a, Func<A, Identity<B>> func, Func<A, B, C> select)
         {
-            return select(a.Value, a.Bind(func).Value).ToIdentity();
+            return select(a.Value, func(a.Value).Value).ToIdentity();
         }
     }
 }
