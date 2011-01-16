@@ -32,13 +32,22 @@ namespace Suteki.Monads
         }
     }
 
-    public interface Maybe<T> {}
+    public interface Maybe<T>
+    {
+        bool HasValue { get; }
+    }
 
     public class Nothing<T> : Maybe<T>
     {
+        
         public override string ToString()
         {
             return "Nothing";
+        }
+
+        public bool HasValue
+        {
+            get { return false; }
         }
     }
 
@@ -52,6 +61,11 @@ namespace Suteki.Monads
         public override string ToString()
         {
             return Value.ToString();
+        }
+
+        public bool HasValue
+        {
+            get { return true; }
         }
     }
 
