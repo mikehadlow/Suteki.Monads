@@ -6,20 +6,20 @@ namespace Suteki.Monads
 {
     public class MonadicParser
     {
-        public static Parser<IList<string>> MakeHelloWorldParser()
+        public static Parser<IEnumerable<string>> MakeHelloWorldParser()
         {
             return
                 from token in "Hello".Find().Or("World".Find())
                 from _ in Parsers.WhiteSpace()
-                from list in Parsers.End<IList<string>>(new List<string>()).Or(MakeHelloWorldParser())
-                select list.AddFluently(token);
+                from list in Parsers.End(Enumerable.Empty<string>()).Or(MakeHelloWorldParser())
+                select token.Cons(list);
         }
 
         public void ParseHelloWorld()
         {
             var helloWorldParser = MakeHelloWorldParser();
 
-            Action<Maybe<Tuple<IList<string>, string>>> writeResult = s => Console.WriteLine(s.AsString(t => t.Aggregate("", (a, b) => a + " - " + b)));
+            Action<Maybe<Tuple<IEnumerable<string>, string>>> writeResult = s => Console.WriteLine(s.AsString(t => t.Aggregate("", (a, b) => a + " - " + b)));
 
             var r1 = helloWorldParser("Hello World Hello World");
             writeResult(r1);
@@ -88,10 +88,10 @@ namespace Suteki.Monads
                 : (Maybe<Tuple<string, string>>)new Nothing<Tuple<string, string>>();
         }
 
-        public static Parser<T> End<T>(T value)
+        public static Parser<T> End<T>(T initialValue)
         {
             return s => (s == "") 
-                ? new Just<Tuple<T, string>>(Tuple.Create(value, s))
+                ? new Just<Tuple<T, string>>(Tuple.Create(initialValue, s))
                 : (Maybe<Tuple<T, string>>)new Nothing<Tuple<T, string>>();
         }
 

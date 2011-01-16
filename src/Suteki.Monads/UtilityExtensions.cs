@@ -18,5 +18,14 @@ namespace Suteki.Monads
                 action(item);
             }
         }
+
+        public static IEnumerable<T> Cons<T>(this T item, IEnumerable<T> list)
+        {
+            yield return item;
+            foreach (var listItem in list)
+            {
+                yield return listItem;
+            }
+        }
     }
 }
