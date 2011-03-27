@@ -65,6 +65,16 @@ namespace Suteki.Monads
 
             Console.WriteLine(result.Value);
         }
+
+        public void AddTwoNumbers()
+        {
+            var result =
+                from a in 3.ToIdentity()
+                from b in 4.ToIdentity()
+                select a + b;
+
+            Console.Out.WriteLine("result.Value = {0}", result.Value);
+        }
     }
 
     // The simplest possible Monad, Identity

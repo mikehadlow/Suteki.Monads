@@ -4,7 +4,7 @@ namespace Suteki.Monads
 {
     public class MaybeMonad
     {
-        public Maybe<int> DoSums(int denominator)
+        public Maybe<int> DoSomeDivision(int denominator)
         {
             return from a in 12.Div(denominator)
                    from b in a.Div(2)
@@ -14,7 +14,7 @@ namespace Suteki.Monads
         public void UseMaybe()
         {
             var result = from a in "Hello World!".ToMaybe()
-                         from b in DoSums(2)
+                         from b in DoSomeDivision(0)
                          from c in (new DateTime(2010, 1, 14)).ToMaybe()
                          select a + " " + b.ToString() + " " + c.ToShortDateString();
 
@@ -32,22 +32,13 @@ namespace Suteki.Monads
         }
     }
 
-    public interface Maybe<T>
-    {
-        bool HasValue { get; }
-    }
+    public interface Maybe<T>{}
 
     public class Nothing<T> : Maybe<T>
     {
-        
         public override string ToString()
         {
             return "Nothing";
-        }
-
-        public bool HasValue
-        {
-            get { return false; }
         }
     }
 
@@ -61,11 +52,6 @@ namespace Suteki.Monads
         public override string ToString()
         {
             return Value.ToString();
-        }
-
-        public bool HasValue
-        {
-            get { return true; }
         }
     }
 
@@ -96,6 +82,11 @@ namespace Suteki.Monads
             return  a.Bind(             aval => 
                     func(aval).Bind(    bval => 
                     select(aval, bval).ToMaybe()));
+        }
+
+        public static Maybe<B> Select<A, B>(this Maybe<A> a, Func<A, Maybe<B>> func)
+        {
+            return a.Bind(func);
         }
     }
 }

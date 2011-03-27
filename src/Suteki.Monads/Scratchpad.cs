@@ -4,47 +4,21 @@ using System.Collections.Generic;
 namespace Suteki.Monads
 {
     public class Scratchpad
+    { }
+
+    public class Whatever<T>{}
+
+    public static class WhateverExtensions
     {
-        public void IntroExamples()
+        public static Whatever<T> ToWhatever<T>(T value) // AKA unit
         {
-            var inputValue = " some input value ";
-            var trimmedValue = Trim(inputValue);
-            if (trimmedValue == null)
-            {
-                // so something different here
-            }
-
-            foreach (var number in Range(5, 10))
-            {
-                // do something with the number
-            }
-
-            if (IsAFactorOfTwelve(4))
-            {
-                Console.WriteLine("Yes it is");
-            }
+            return new Whatever<T>();
         }
 
-        bool IsAFactorOfTwelve(int value)
+        public static Whatever<B> Bind<A,B>(Whatever<A> a, Func<A, Whatever<B>> func)
         {
-            if (value == 0) throw new Exception("Can't divide by zero");
-            return (12%value) == 0;
+            return new Whatever<B>();
         }
-
-        string Trim(string value)
-        {
-            if (value == null) return null;
-            return value.Trim();
-        }
-
-        IEnumerable<int> Range(int from, int to)
-        {
-            for (int i = from; i <= to; i++)
-            {
-                yield return i;
-            }
-        }
-
-
     }
+
 }

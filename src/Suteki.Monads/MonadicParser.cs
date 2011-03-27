@@ -19,7 +19,8 @@ namespace Suteki.Monads
         {
             var helloWorldParser = MakeHelloWorldParser();
 
-            Action<Maybe<Tuple<IEnumerable<string>, string>>> writeResult = s => Console.WriteLine(s.AsString(t => t.Aggregate("", (a, b) => a + " - " + b)));
+            Action<Maybe<Tuple<IEnumerable<string>, string>>> writeResult = 
+                s => Console.WriteLine(s.AsString(t => t.Aggregate("", (a, b) => a + " - " + b)));
 
             var r1 = helloWorldParser("Hello World Hello World");
             writeResult(r1);
@@ -29,6 +30,23 @@ namespace Suteki.Monads
             
             var r3 = helloWorldParser("Hello x World");
             writeResult(r3);
+        }
+
+        public void SimpleHelloWorldParser()
+        {
+            var helloWorldParser =
+                from hello in "Hello".Find()
+                from world in "World".Find()
+                select new {Hello = hello, World = world};
+
+            var result = helloWorldParser("HelloWorld");
+
+            Console.WriteLine(result.AsString(x => x.Hello));
+            Console.WriteLine(result.AsString(x => x.World));
+
+            // outputs 
+            // Hello
+            // World
         }
     }
 
@@ -69,7 +87,7 @@ namespace Suteki.Monads
             return s => 
             {
                 var aMaybe = a(s);
-                return aMaybe.HasValue ? aMaybe : b(s);
+                return aMaybe is Just<Tuple<T,string>> ? aMaybe : b(s);
             };
         }
     }
