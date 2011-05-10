@@ -1,0 +1,26 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Suteki.Monads/TaskMonad.cs">
+    <Files>
+      <File FileName="Demo/Composition.cs" Line="69" Column="10" />
+      <File FileName="Suteki.Monads/EnumerableMonad.cs" Line="49" Column="1" />
+      <File FileName="Suteki.Monads/TaskMonad.cs" Line="31" Column="33" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Demo" expanded="True" />
+          <Node name="Runner" expanded="True" selected="True" />
+          <Node name="Suteki.Monads" expanded="True" />
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

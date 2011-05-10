@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9FC37300-05D7-420D-9948-BC0AD059F824}</ProjectGuid>
+    <ProjectGuid>{384EEC00-7453-4E82-BDBF-7CD6872A2F9D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Suteki.Monads</RootNamespace>
-    <AssemblyName>Suteki.Monads</AssemblyName>
+    <RootNamespace>Demo</RootNamespace>
+    <AssemblyName>Demo</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,15 +36,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoilerPlate.cs" />
-    <Compile Include="FunctionComposition.cs" />
-    <Compile Include="MaybeMonad.cs" />
-    <Compile Include="MonadicParser.cs" />
+    <Compile Include="Composition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scratchpad.cs" />
-    <Compile Include="UtilityExtensions.cs" />
-    <Compile Include="EnumerableMonad.cs" />
-    <Compile Include="TaskMonad.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
